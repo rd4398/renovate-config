@@ -1,4 +1,6 @@
 hello-world:
-    stage: hello
+    stage: build
+    tags:
+        - dev
     script:
         - echo "Hello, world"
