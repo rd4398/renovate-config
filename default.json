@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>platform-engineering-org/.github",
+    "github>platform-engineering-org/.github//konflux.json",
     "group:all"
   ],
   "schedule": ["at any time"]
