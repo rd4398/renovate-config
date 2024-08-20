@@ -1,6 +1,19 @@
-hello-world:
-    stage: build
-    tags:
-        - dev
-    script:
-        - echo "Hello, world"
+stages:
+  - lint
+
+default:
+  tags:
+    - platform-engineering
+
+lint:
+  stage: lint
+  image: registry.redhat.io/rhel8/nodejs-20:1-58
+  rules:
+    - if: '$CI_PROJECT_NAMESPACE != "redhat/rhel-ai"'
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - default.json
+        - .gitlab-ci.yml
+  script:
+    - npx --yes --package renovate -- renovate-config-validator --strict
