@@ -5,6 +5,6 @@
     "github>platform-engineering-org/.github//konflux.json",
     "group:all"
   ],
-  "schedule": ["at any time"],
+  "dependencyDashboardApproval": true,
   "automerge": false
 }
