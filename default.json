@@ -5,6 +5,16 @@
     "github>platform-engineering-org/.github//konflux.json",
     "group:all"
   ],
-  "dependencyDashboardApproval": true,
-  "automerge": false
+  "packageRules": [
+    {
+      "dependencyDashboardApproval": true,
+      "ignorePaths": ["**/disk-images/**"],
+      "automerge": false
+    },
+    {
+      "schedule": ["at any time"],
+      "includePaths": ["**/disk-images/**"],
+      "automerge": true
+    }
+  ]
 }
