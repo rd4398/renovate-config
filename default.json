@@ -7,14 +7,14 @@
   ],
   "packageRules": [
     {
-      "dependencyDashboardApproval": true,
-      "ignorePaths": ["**/disk-images/**"],
-      "automerge": false
-    },
-    {
       "schedule": ["at any time"],
       "includePaths": ["**/disk-images/**"],
       "automerge": true
+    },
+    {
+      "dependencyDashboardApproval": true,
+      "ignorePaths": ["**/disk-images/**"],
+      "automerge": false
     }
   ]
 }
