@@ -3,6 +3,7 @@
   "extends": [
     "github>platform-engineering-org/.github",
     "github>platform-engineering-org/.github//konflux.json",
+    "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
     "group:all"
   ],
   "packageRules": [
