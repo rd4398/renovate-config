@@ -4,7 +4,11 @@
     "packageRules": [
       {
         "enabled": false,
-        "matchBaseBranches": ["1.1","konflux/references/1.1"]
+        "matchBaseBranches": ["1.1"]
       }
-  ]
+    ],
+    "tekton": {
+      "enabled": false,
+      "matchBaseBranches": ["1.1"]
+    }
 }
