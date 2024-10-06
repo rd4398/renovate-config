@@ -1,4 +1,10 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "baseBranches": ["/^main$|^1.\\d$/"]
+    "baseBranches": ["/^main$|^1.\\d$/"],
+    "packageRules": [
+      {
+        "enabled": false,
+        "matchBaseBranches": ["1.1"]
+      }
+  ]
 }
