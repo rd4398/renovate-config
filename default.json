@@ -5,17 +5,5 @@
     "github>platform-engineering-org/.github//konflux.json",
     "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
     "group:all"
-  ],
-  "packageRules": [
-    {
-      "schedule": ["at any time"],
-      "includePaths": ["**/disk-images/**"],
-      "automerge": true
-    },
-    {
-      "dependencyDashboardApproval": true,
-      "ignorePaths": ["**/disk-images/**"],
-      "automerge": false
-    }
   ]
 }
