@@ -6,5 +6,6 @@
     "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
     "group:all"
   ],
-  "automerge": false
+  "automerge": false,
+  "schedule": ["at any time"]
 }
