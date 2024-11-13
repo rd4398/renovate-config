@@ -7,5 +7,14 @@
     "group:all"
   ],
   "automerge": false,
-  "schedule": ["at any time"]
+  "schedule": ["at any time"],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "registry.access.redhat.com/ubi9/ubi",
+        "registry.redhat.io/ubi9/ubi"
+      ],
+      "allowedVersions": "/^9\\.4-[\\d.]+$/"
+    }
+  ]
 }
