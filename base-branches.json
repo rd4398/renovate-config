@@ -13,9 +13,5 @@
     "tekton": {
       "enabled": false,
       "matchBaseBranches": ["1.1", "1.2"]
-    },
-    "git-submodules": {
-      "enabled": false,
-      "matchBaseBranches": ["/^1.\\d$/"]
     }
 }
