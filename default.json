@@ -1,20 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "_fedora_preset_disabled": "TODO: Enable when Fedora support needed - gitlab>redhat/rhel-ai/renovate-config/fedora.json",
   "extends": [
-    "github>platform-engineering-org/.github",
-    "github>platform-engineering-org/.github//konflux.json",
+    "gitlab>redhat/rhel-ai/renovate-config//dependency-patterns.json",
     "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
-    "group:all"
+    "gitlab>redhat/rhel-ai/renovate-config//package-rules.json",
+    "gitlab>redhat/rhel-ai/renovate-config//konflux.json",
+    "config:best-practices",
+    ":maintainLockFilesWeekly",
+    ":enablePreCommit",
+    "group:all",
+    "regexManagers:dockerfileVersions",
+    "schedule:weekly",
+    "workarounds:supportRedHatImageVersion",
+    ":gitSignOff",
+    ":pinDigestsDisabled",
+    "customManagers:gitlabPipelineVersions"
   ],
   "automerge": false,
   "schedule": ["at any time"],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "registry.access.redhat.com/ubi9/ubi",
-        "registry.redhat.io/ubi9/ubi"
-      ],
-      "allowedVersions": "/^9\\.4-[\\d.]+$/"
-    }
-  ]
+  "git-submodules": {
+    "enabled": true
+  },
+  "cloneSubmodules": true,
+  "configMigration": true,
+  "onboardingNoDeps": "auto",
+  "gitAuthor": "AIPCC CICD Bot <aipcc-cicd-bot@redhat.com>",
+  "rebaseWhen": "behind-base-branch",
+  "prConcurrentLimit": 0
 }
