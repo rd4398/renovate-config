@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "automerge": false
+    },
+    {
+      "matchPackageNames": [
+      "registry.access.redhat.com/ubi9/ubi",
+      "registry.redhat.io/ubi9/ubi"
+      ],
+      "allowedVersions": "/^9\\.4-[\\d.]+$/"
+    }
+  ]
+}

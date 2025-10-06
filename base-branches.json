@@ -1,17 +1,16 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "baseBranches": ["/^main$|^1.\\d$/"],
-    "packageRules": [
-      {
-        "enabled": false,
-        "matchBaseBranches": ["1.1", "1.2", "1.3", "1.4"]
-      },
-      {
-        "automerge": false
-      }
-    ],
-    "tekton": {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": [
+    "/^main$|^\\d\\.[\\d]+$/"
+  ],
+  "packageRules": [
+    {
       "enabled": false,
       "matchBaseBranches": ["1.1", "1.2", "1.3", "1.4"]
     }
+  ],
+  "tekton": {
+    "enabled": false,
+    "matchBaseBranches": ["1.1", "1.2", "1.3", "1.4"]
+  }
 }
