@@ -25,7 +25,6 @@
   "cloneSubmodules": true,
   "configMigration": true,
   "onboardingNoDeps": "auto",
-  "gitAuthor": "AIPCC CICD Bot <aipcc-cicd-bot@redhat.com>",
   "rebaseWhen": "behind-base-branch",
   "prConcurrentLimit": 0
 }
