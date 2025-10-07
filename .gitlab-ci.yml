@@ -3,7 +3,7 @@ stages:
 
 default:
   tags:
-    - platform-engineering
+    - aipcc
 
 lint:
   stage: lint
