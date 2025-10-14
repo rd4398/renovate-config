@@ -5,6 +5,10 @@
       "automerge": false
     },
     {
+      "matchManagers": ["regex"],
+      "pinDigests": false
+    },
+    {
       "matchPackageNames": [
       "registry.access.redhat.com/ubi9/ubi",
       "registry.redhat.io/ubi9/ubi"
