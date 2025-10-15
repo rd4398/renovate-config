@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "_fedora_preset_disabled": "TODO: Enable when Fedora support needed - gitlab>redhat/rhel-ai/renovate-config/fedora.json",
   "extends": [
-    "gitlab>redhat/rhel-ai/renovate-config//dependency-patterns.json",
-    "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
-    "gitlab>redhat/rhel-ai/renovate-config//package-rules.json",
-    "gitlab>redhat/rhel-ai/renovate-config//konflux.json",
     "config:best-practices",
     ":maintainLockFilesWeekly",
     ":enablePreCommit",
@@ -15,7 +10,11 @@
     "workarounds:supportRedHatImageVersion",
     ":gitSignOff",
     ":pinDigestsDisabled",
-    "customManagers:gitlabPipelineVersions"
+    "customManagers:gitlabPipelineVersions",
+    "gitlab>redhat/rhel-ai/renovate-config//dependency-patterns.json",
+    "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
+    "gitlab>redhat/rhel-ai/renovate-config//package-rules.json",
+    "gitlab>redhat/rhel-ai/renovate-config//konflux.json"
   ],
   "automerge": false,
   "schedule": ["at any time"],
