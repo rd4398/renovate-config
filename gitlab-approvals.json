@@ -1,0 +1,5 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "GitLab-specific configuration for repositories with non-author approval requirements. Allows Renovate MRs to bypass approval rules for automated dependency updates.",
+  "gitLabIgnoreApprovals": true
+}
