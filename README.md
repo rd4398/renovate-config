@@ -12,6 +12,7 @@ renovate-config/
 ├── package-rules.json
 ├── konflux.json                         # Tool-specific preset
 ├── fedora.json                          # Ecosystem-specific preset
+├── gitlab-approvals.json                # GitLab approval rules compatibility
 ├── rhaiis/
 │   └── rhaiis.json                        # Product-level presets
 ├── rhel-ai/
@@ -28,6 +29,7 @@ renovate-config/
 - **`dependency-patterns.json`** - Standard dependency matching patterns
 - **`konflux.json`** - Konflux CI/CD tooling configurations
 - **`fedora.json`** - Fedora ecosystem and versioning settings
+- **`gitlab-approvals.json`** - GitLab approval rules compatibility (use for repos with non-author approval enforcement)
 
 ### **Product Level**
 - **`rhaiis/rhaiis.json`** - Product level specific configuration for RHAIIS repositories
@@ -85,6 +87,19 @@ RHAIIS repositories extend default + RHAIIS preset:
   "extends": [
     "local>redhat/rhel-ai/renovate-config",
     "local>redhat/rhel-ai/renovate-config//rhaiis/base"
+  ]
+}
+```
+
+### **Repository with Non-Author Approval Enforcement**
+Repositories that enforce non-author approval on merge requests should extend the gitlab-approvals preset to allow Renovate MRs to bypass approval requirements:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>redhat/rhel-ai/renovate-config",
+    "local>redhat/rhel-ai/renovate-config//gitlab-approvals"
   ]
 }
 ```

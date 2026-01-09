@@ -14,7 +14,8 @@
     "gitlab>redhat/rhel-ai/renovate-config//dependency-patterns.json",
     "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
     "gitlab>redhat/rhel-ai/renovate-config//package-rules.json",
-    "gitlab>redhat/rhel-ai/renovate-config//konflux.json"
+    "gitlab>redhat/rhel-ai/renovate-config//konflux.json",
+    "gitlab>redhat/rhel-ai/renovate-config//gitlab-approvals.json"
   ],
   "automerge": false,
   "schedule": ["at any time"],
