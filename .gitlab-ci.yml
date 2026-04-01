@@ -1,3 +1,12 @@
+include:
+  # AI Code Review
+  - project: 'redhat/rhel-ai/core/tools/ai-review'
+    file: 'ai-review.gitlab-ci.yml'
+    inputs:
+      INSTRUCTIONS: "Use the repo-reviewer skill for specialized Renovate config review. Focus on JSON schema correctness, regex patterns, package rule logic, and cross-config consistency."
+    rules:
+      - if: '$CI_MERGE_REQUEST_LABELS =~ /ai-review/'
+
 stages:
   - lint
 
@@ -7,11 +16,7 @@ default:
 
 lint:
   stage: lint
-  image: docker:24.0.5
-  services:
-    - docker:24.0.5-dind
-  variables:
-    IMAGE: registry.redhat.io/rhel8/nodejs-20:1-58
+  image: node:20
   rules:
     - if: '$CI_PROJECT_NAMESPACE != "redhat/rhel-ai"'
       when: never
@@ -19,12 +24,5 @@ lint:
       changes:
         - default.json
         - .gitlab-ci.yml
-  before_script:
-    - docker login registry.redhat.io --username ${REGISTRY_USER} --password ${REGISTRY_PASSWORD}
-    - docker pull ${IMAGE}
   script:
-    - >
-      docker run \
-        -v "./:/opt/app-root/src" \
-        ${IMAGE} \
-        npx --yes --package renovate -- renovate-config-validator --strict
+    - npx --yes --package renovate -- renovate-config-validator --strict
