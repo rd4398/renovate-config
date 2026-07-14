@@ -6,6 +6,10 @@ include:
       INSTRUCTIONS: "Use the repo-reviewer skill for specialized Renovate config review. Focus on JSON schema correctness, regex patterns, package rule logic, and cross-config consistency."
     rules:
       - if: '$CI_MERGE_REQUEST_LABELS =~ /ai-review/'
+  # Central linter (MR/commit linter)
+  - project: 'redhat/rhel-ai/ci-cd/central-linter'
+    file: '/templates/linter-central.yml'
+    ref: v0.3.0
 
 stages:
   - lint
@@ -22,7 +26,7 @@ lint:
       when: never
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
-        - default.json
+        - "*.json"
         - .gitlab-ci.yml
   script:
     - npx --yes --package renovate -- renovate-config-validator --strict
