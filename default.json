@@ -10,12 +10,7 @@
     "workarounds:supportRedHatImageVersion",
     ":gitSignOff",
     ":pinDigestsDisabled",
-    "customManagers:gitlabPipelineVersions",
-    "gitlab>redhat/rhel-ai/renovate-config//dependency-patterns.json",
-    "gitlab>redhat/rhel-ai/renovate-config//base-branches.json",
-    "gitlab>redhat/rhel-ai/renovate-config//package-rules.json",
-    "gitlab>redhat/rhel-ai/renovate-config//konflux.json",
-    "gitlab>redhat/rhel-ai/renovate-config//gitlab-approvals.json"
+    "customManagers:gitlabPipelineVersions"
   ],
   "automerge": false,
   "schedule": ["at any time"],
@@ -28,5 +23,74 @@
   "gitAuthor": "AIPCC CICD Bot <aipcc-cicd-bot@redhat.com>",
   "ignorePrAuthor": true,
   "rebaseWhen": "behind-base-branch",
-  "prConcurrentLimit": 0
+  "prConcurrentLimit": 0,
+  "gitLabIgnoreApprovals": true,
+  "baseBranches": [
+    "/^main$|^\\d\\.[\\d]+$/"
+  ],
+  "packageRules": [
+    {
+      "description": "base-branches: disable all updates on EOL branches",
+      "enabled": false,
+      "matchBaseBranches": ["1.1", "1.2", "1.3", "1.4"]
+    },
+    {
+      "description": "package-rules: global automerge off",
+      "automerge": false
+    },
+    {
+      "description": "package-rules: override docker:pinDigests preset provided by config:best-practices",
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": false
+    },
+    {
+      "description": "package-rules: override helpers:pinGitHubActionDigests preset provided by config:best-practices",
+      "matchDepTypes": [
+        "action"
+      ],
+      "pinDigests": false
+    },
+    {
+      "description": "package-rules: pin UBI9 to tested minor stream",
+      "matchPackageNames": [
+        "registry.access.redhat.com/ubi9/ubi",
+        "registry.redhat.io/ubi9/ubi"
+      ],
+      "allowedVersions": "/^9\\.4-[\\d.]+$/"
+    }
+  ],
+  "tekton": {
+    "description": "konflux: scope Tekton manager to .tekton/ and disable on EOL branches",
+    "enabled": false,
+    "matchBaseBranches": ["1.1", "1.2", "1.3", "1.4"],
+    "fileMatch": ["\\.yaml$", "\\.yml$"],
+    "includePaths": [".tekton/**"],
+    "packageRules": [
+      {
+        "matchPackagePatterns": [
+          "^quay.io/redhat-appstudio-tekton-catalog/",
+          "^quay.io/konflux-ci/tekton-catalog/"
+        ],
+        "enabled": true,
+        "groupName": "Konflux references",
+        "branchName": "renovate/konflux/references/{{baseBranch}}",
+        "commitMessageTopic": "Konflux references",
+        "semanticCommits": "enabled",
+        "prFooter": "To execute skipped test pipelines write comment `/ok-to-test`",
+        "prBodyColumns": [
+          "Package",
+          "Change",
+          "Notes"
+        ],
+        "prBodyDefinitions": {
+          "Notes": "{{#if (or (containsString updateType 'minor') (containsString updateType 'major'))}}{{#if (containsString packageName 'sast')}}:warning:[migration](https://github.com/konflux-ci/konflux-sast-tasks/blob/main/task/{{{replace '^quay.io/(redhat-appstudio-tekton-catalog|konflux-ci/tekton-catalog)/task-' '' packageName}}}/{{{newVersion}}}/MIGRATION.md):warning:{{else}}:warning:[migration](https://github.com/redhat-appstudio/build-definitions/blob/main/task/{{{replace '^quay.io/(redhat-appstudio-tekton-catalog|konflux-ci/tekton-catalog)/task-' '' packageName}}}/{{{newVersion}}}/MIGRATION.md):warning:{{/if}}{{/if}}"
+        },
+        "prBodyTemplate": "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{footer}}}",
+        "recreateWhen": "always",
+        "rebaseWhen": "behind-base-branch"
+      }
+    ]
+  }
 }
