@@ -11,7 +11,6 @@ renovate-config/
 ├── base-branches.json
 ├── package-rules.json
 ├── konflux.json                         # Tool-specific preset
-├── fedora.json                          # Ecosystem-specific preset
 ├── gitlab-approvals.json                # GitLab approval rules compatibility
 ├── rhaiis/
 │   └── rhaiis.json                        # Product-level presets
@@ -28,7 +27,6 @@ renovate-config/
 - **`package-rules.json`** - Common package management and automerge rules
 - **`dependency-patterns.json`** - Standard dependency matching patterns
 - **`konflux.json`** - Konflux CI/CD tooling configurations
-- **`fedora.json`** - Fedora ecosystem and versioning settings
 - **`gitlab-approvals.json`** - GitLab approval rules compatibility (use for repos with non-author approval enforcement)
 
 ### **Product Level**
@@ -86,7 +84,7 @@ RHAIIS repositories extend default + RHAIIS preset:
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>redhat/rhel-ai/renovate-config",
-    "local>redhat/rhel-ai/renovate-config//rhaiis/base"
+    "local>redhat/rhel-ai/renovate-config//rhaiis/rhaiis"
   ]
 }
 ```
@@ -157,3 +155,7 @@ Add your own patterns while keeping the preset benefits:
   ]
 }
 ```
+
+## License
+
+This project is licensed under the [Apache License, Version 2.0](LICENSE).
