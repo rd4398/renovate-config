@@ -10,6 +10,7 @@ renovate-config/
 ├── dependency-patterns.json
 ├── base-branches.json
 ├── package-rules.json
+├── base-images.json                     # Base image update detection
 ├── konflux.json                         # Tool-specific preset
 ├── gitlab-approvals.json                # GitLab approval rules compatibility
 ├── rhaiis/
@@ -26,6 +27,7 @@ renovate-config/
 - **`base-branches.json`** - Standard branch patterns and enabling rules
 - **`package-rules.json`** - Common package management and automerge rules
 - **`dependency-patterns.json`** - Standard dependency matching patterns
+- **`base-images.json`** - Base image update detection for teams consuming AIPCC base images from `quay.io/aipcc/base-images`, `registry.redhat.io/rhai`, or `registry.redhat.io/rhai-early-access`
 - **`konflux.json`** - Konflux CI/CD tooling configurations
 - **`gitlab-approvals.json`** - GitLab approval rules compatibility (use for repos with non-author approval enforcement)
 
@@ -85,6 +87,31 @@ RHAIIS repositories extend default + RHAIIS preset:
   "extends": [
     "local>redhat/rhel-ai/renovate-config",
     "local>redhat/rhel-ai/renovate-config//rhaiis/rhaiis"
+  ]
+}
+```
+
+### **Repository Consuming Base Images**
+Repositories that use AIPCC base images from `quay.io/aipcc/base-images`, `registry.redhat.io/rhai`, or `registry.redhat.io/rhai-early-access` extend the base-images preset to get automated update detection:
+
+**GitLab:**
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>redhat/rhel-ai/renovate-config",
+    "local>redhat/rhel-ai/renovate-config//base-images"
+  ]
+}
+```
+
+**GitHub:**
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>opendatahub-io/renovate-config",
+    "local>opendatahub-io/renovate-config//base-images"
   ]
 }
 ```
