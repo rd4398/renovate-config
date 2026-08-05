@@ -5,7 +5,7 @@
 # GitLab uses last-match-wins: order from least specific to most specific.
 
 # All team members can approve all changes
-* @adrianriobo @amastbau @charliallen @dkuma @gnaponie @jmorenas @jrusz @kdreyer @pditmars @ppitonak @rishupk @srija.ganguly @victoremepunto @xiyangdong
+* @adrianriobo @amastbau @charliallen @deekay2310 @gnaponie @jangel97 @jrusz @ktdreyer @peteditmars @ppitonak @rishupk @srija-ganguly @Victoremepunto @XiyangDong
 
 # CODEOWNERS itself is tightly held
-CODEOWNERS @adrianriobo @amastbau @charliallen @dkuma @gnaponie @jmorenas @jrusz @kdreyer @pditmars @ppitonak @rishupk @srija.ganguly @victoremepunto @xiyangdong
+/CODEOWNERS @adrianriobo @amastbau @charliallen @deekay2310 @gnaponie @jangel97 @jrusz @ktdreyer @peteditmars @ppitonak @rishupk @srija-ganguly @Victoremepunto @XiyangDong
