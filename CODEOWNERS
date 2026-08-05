@@ -1,11 +1,9 @@
-# GitLab CODEOWNERS file
-# This file defines who owns different parts of the codebase and can approve changes.
-# See: https://docs.gitlab.com/user/project/codeowners
+# CODEOWNERS
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# The last matching pattern takes precedence.
 
-# GitLab uses last-match-wins: order from least specific to most specific.
-
-# All team members can approve all changes
+# Default owners for everything in the repo
 * @adrianriobo @amastbau @charliallen @deekay2310 @gnaponie @jangel97 @jrusz @ktdreyer @peteditmars @ppitonak @rishupk @srija-ganguly @Victoremepunto @XiyangDong
 
-# CODEOWNERS itself is tightly held
+# CODEOWNERS itself
 /CODEOWNERS @adrianriobo @amastbau @charliallen @deekay2310 @gnaponie @jangel97 @jrusz @ktdreyer @peteditmars @ppitonak @rishupk @srija-ganguly @Victoremepunto @XiyangDong
