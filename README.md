@@ -11,6 +11,7 @@ renovate-config/
 ├── base-branches.json
 ├── package-rules.json
 ├── base-images.json                     # Base image update detection
+├── pypi-packages.json                   # Python package updates from packages.redhat.com
 ├── konflux.json                         # Tool-specific preset
 ├── gitlab-approvals.json                # GitLab approval rules compatibility
 ├── rhaiis/
@@ -28,6 +29,7 @@ renovate-config/
 - **`package-rules.json`** - Common package management and automerge rules
 - **`dependency-patterns.json`** - Standard dependency matching patterns
 - **`base-images.json`** - Base image update detection for teams consuming AIPCC base images from `quay.io/aipcc/base-images`, `registry.redhat.io/rhai`, or `registry.redhat.io/rhai-early-access`
+- **`pypi-packages.json`** - Python package update detection for teams consuming packages from `packages.redhat.com`. Parameterized preset — teams pass the Simple API path (origin is hardcoded)
 - **`konflux.json`** - Konflux CI/CD tooling configurations
 - **`gitlab-approvals.json`** - GitLab approval rules compatibility (use for repos with non-author approval enforcement)
 
@@ -112,6 +114,48 @@ Repositories that use AIPCC base images from `quay.io/aipcc/base-images`, `regis
   "extends": [
     "local>opendatahub-io/renovate-config",
     "local>opendatahub-io/renovate-config//base-images"
+  ]
+}
+```
+
+### **Repository Consuming Python Packages from packages.redhat.com**
+Repositories that consume Python packages from `packages.redhat.com` extend the pypi-packages preset to get automated `requirements.txt` updates when new package versions are published. Pass the Simple API path as a parameter — the path varies by product, version, and platform (e.g. `public-rhai/rhoai/3.5/cpu-ubi9`). The preset hardcodes the `https://packages.redhat.com/api/pypi/` origin:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>redhat/rhel-ai/renovate-config",
+    "local>redhat/rhel-ai/renovate-config:pypi-packages(public-rhai/rhoai/3.5/cpu-ubi9)"
+  ]
+}
+```
+
+Renovate will scan `requirements.txt` files, query the registry for new versions, and open MRs to update pinned versions. All Python dependency updates are grouped into a single MR.
+
+**Notes:**
+- Only packages available on the specified `packages.redhat.com` registry are updated — there is no fallback to `pypi.org`
+- The registry serves a PEP 503 Simple Repository API, compatible with Renovate's `pypi` datasource
+- Teams use standard PEP 440 version pins (e.g. `==1.13.0`) in their `requirements.txt`
+- If your `requirements.txt` files use non-standard names or paths, add a `managerFilePatterns` override in your repository config
+- To use **multiple registries**, override `registryUrls` in a `packageRules` entry in your repository config. Renovate queries each URL in order and uses the first that returns results for a given package:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>redhat/rhel-ai/renovate-config",
+    "local>redhat/rhel-ai/renovate-config:pypi-packages(public-rhai/rhoai/3.5/cpu-ubi9)"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["pip_requirements"],
+      "matchDatasources": ["pypi"],
+      "registryUrls": [
+        "https://packages.redhat.com/api/pypi/public-rhai/rhoai/3.5/cpu-ubi9/simple/",
+        "https://packages.redhat.com/api/pypi/public-rhai/rhoai/3.5/cuda-ubi9/simple/"
+      ]
+    }
   ]
 }
 ```

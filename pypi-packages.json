@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Preset for teams consuming Python packages from packages.redhat.com. Pass the Simple API path as a parameter (e.g. public-rhai/rhoai/3.5/cpu-ubi9).",
+  "packageRules": [
+    {
+      "description": "Route Python dependency lookups to the Red Hat registry and group updates",
+      "matchManagers": ["pip_requirements"],
+      "matchDatasources": ["pypi"],
+      "registryUrls": ["https://packages.redhat.com/api/pypi/{{arg0}}/simple/"],
+      "groupName": "python-dependencies"
+    }
+  ]
+}
